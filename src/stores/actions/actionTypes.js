@@ -1,7 +1,0 @@
-const CHANGE_THEMEID='CHANGE_THEMEID';
-const  Chnage_SIDEISOPEN='Chnage_SIDEISOPEN';
-
-export  {
-    CHANGE_THEMEID,
-    Chnage_SIDEISOPEN
-} ;
