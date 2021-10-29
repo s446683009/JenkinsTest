@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from './Header.module.css';
-import MenuIcon from '@material-ui/icons/Menu';
-import AddIcon from "@material-ui/icons/Add";
-import ForumIcon from "@material-ui/icons/Forum";
+import MenuIcon from '@mui/material/Icon/Menu';
+import AddIcon from "@mui/material/Icon/add";
+import ForumIcon from "@mui/material/Icon/Forum";
 import {useMemo,useCallback} from 'react';
-import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { IconButton ,Box,Tooltip,useMediaQuery} from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import NotificationsActiveIcon from "@mui/material/Icon/NotificationsActive";
+import ExpandMoreIcon from "@mui/material/Icon/ExpandMore";
+import { IconButton ,Box,Tooltip,useMediaQuery} from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import {useDispatch} from 'react-redux'
 import {changeSideOpen as changeSide } from '../../stores/actions/actions'
 export default function MaterialHeader({sideHide}) {

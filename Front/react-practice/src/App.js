@@ -3,7 +3,7 @@ import {Switch,HashRouter as Router} from 'react-router-dom'
 import {renderRoutes} from 'react-router-config';
 import routes from './router-config'
 import getTheme from './util/getTheme'
-import { ThemeProvider } from '@material-ui/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import {useSelector} from 'react-redux'
 
 

@@ -2,8 +2,8 @@ import React,{useMemo}from 'react'
 import PropTypes from 'prop-types'
 import styles from './Sider.module.css';
 import Menu from '../Menu/index';
-import {Box,useMediaQuery} from '@material-ui/core'
-import {useTheme} from '@material-ui/styles'
+import {Box,useMediaQuery} from '@mui/material'
+import {useTheme} from '@mui/material'
 
 
 function Sider(props) {

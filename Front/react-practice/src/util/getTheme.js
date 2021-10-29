@@ -1,6 +1,6 @@
 
-import {pink,indigo,red,green,grey,blue,orange,purple,cyan} from '@material-ui/core/colors'
-import { createMuiTheme } from '@material-ui/core/styles';
+import {pink,indigo,red,green,grey,blue,orange,purple,cyan} from '@mui/material/colors'
+import { createTheme } from '@mui/material/styles';
 // export default createMuiTheme({
 //     palette:{
 //         type:'light',
@@ -227,9 +227,9 @@ const themeObj={[THEME_TEMPLATE_KEY.INDIGO]: {
 
 function getTheme(themeId){
   if(themeObj[themeId])
-    return createMuiTheme(themeObj[themeId].theme);
+    return createTheme(themeObj[themeId].theme);
   else
-    return createMuiTheme(themeObj[THEME_TEMPLATE_KEY.INDIGO].theme);
+    return createTheme(themeObj[THEME_TEMPLATE_KEY.INDIGO].theme);
 }
 
 export default getTheme;

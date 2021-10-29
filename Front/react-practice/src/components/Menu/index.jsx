@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { ChevronRight, ExpandMore as ExpandMoreIcon } from '@mui/material/Icon';
-import { Button, Box,List,ListItem,ListItemIcon,ListItemText,Collapse} from '@material-ui/core';
+import { Button, Box,List,ListItem,ListItemIcon,ListItemText,Collapse} from '@mui/material';
 import styled from './Menu.module.css';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
-import { makeStyles } from '@material-ui/styles';
+import InboxIcon from '@mui/material/Icon/MoveToInbox';
+import DraftsIcon from '@mui/material/Icon';
+import SendIcon from '@mui/material/Icon/Send';
+import ExpandLess from '@mui/material/Icon/ExpandLess';
+import ExpandMore from '@mui/material/Icon/ExpandMore';
+import StarBorder from '@mui/material/Icon/StarBorder';
+import { makeStyles } from '@mui/material/styles';
 import menus from '../../util/getMenu'
 
 
