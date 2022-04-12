@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "P+7vmiYLl0ymKSuzM2nqwNaq6msmJaei93HDhR/HSCFCCSOKUE/ejKo4WGUzwT52Uji18kpsmFR3yKair+MbCg==",
+  "success": true,
+  "projectFilePath": "D:\\SCR\\Backend\\SCR\\src\\Services\\Identity\\Identity.Domain\\Identity.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\SoloTravelling\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,16 @@
+D:\SCR\Backend\SCR\SCR.Test\bin\Debug\net5.0\SCR.Test.exe
+D:\SCR\Backend\SCR\SCR.Test\bin\Debug\net5.0\SCR.Test.deps.json
+D:\SCR\Backend\SCR\SCR.Test\bin\Debug\net5.0\SCR.Test.runtimeconfig.json
+D:\SCR\Backend\SCR\SCR.Test\bin\Debug\net5.0\SCR.Test.runtimeconfig.dev.json
+D:\SCR\Backend\SCR\SCR.Test\bin\Debug\net5.0\SCR.Test.dll
+D:\SCR\Backend\SCR\SCR.Test\bin\Debug\net5.0\ref\SCR.Test.dll
+D:\SCR\Backend\SCR\SCR.Test\bin\Debug\net5.0\SCR.Test.pdb
+D:\SCR\Backend\SCR\SCR.Test\obj\Debug\net5.0\SCR.Test.GeneratedMSBuildEditorConfig.editorconfig
+D:\SCR\Backend\SCR\SCR.Test\obj\Debug\net5.0\SCR.Test.AssemblyInfoInputs.cache
+D:\SCR\Backend\SCR\SCR.Test\obj\Debug\net5.0\SCR.Test.AssemblyInfo.cs
+D:\SCR\Backend\SCR\SCR.Test\obj\Debug\net5.0\SCR.Test.csproj.CoreCompileInputs.cache
+D:\SCR\Backend\SCR\SCR.Test\obj\Debug\net5.0\SCR.Test.dll
+D:\SCR\Backend\SCR\SCR.Test\obj\Debug\net5.0\ref\SCR.Test.dll
+D:\SCR\Backend\SCR\SCR.Test\obj\Debug\net5.0\SCR.Test.pdb
+D:\SCR\Backend\SCR\SCR.Test\obj\Debug\net5.0\SCR.Test.genruntimeconfig.cache
+D:\SCR\Backend\SCR\SCR.Test\obj\Debug\net5.0\SCR.Test.csprojAssemblyReference.cache

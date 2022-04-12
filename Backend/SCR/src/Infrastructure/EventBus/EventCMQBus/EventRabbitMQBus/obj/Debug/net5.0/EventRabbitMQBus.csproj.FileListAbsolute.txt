@@ -1,0 +1,15 @@
+D:\SCR\Backend\SCR\src\Infrastructure\EventBus\EventCMQBus\EventRabbitMQBus\obj\Debug\net5.0\EventRabbitMQBus.csprojAssemblyReference.cache
+D:\SCR\Backend\SCR\src\Infrastructure\EventBus\EventCMQBus\EventRabbitMQBus\obj\Debug\net5.0\EventRabbitMQBus.GeneratedMSBuildEditorConfig.editorconfig
+D:\SCR\Backend\SCR\src\Infrastructure\EventBus\EventCMQBus\EventRabbitMQBus\obj\Debug\net5.0\EventRabbitMQBus.AssemblyInfoInputs.cache
+D:\SCR\Backend\SCR\src\Infrastructure\EventBus\EventCMQBus\EventRabbitMQBus\obj\Debug\net5.0\EventRabbitMQBus.AssemblyInfo.cs
+D:\SCR\Backend\SCR\src\Infrastructure\EventBus\EventCMQBus\EventRabbitMQBus\obj\Debug\net5.0\EventRabbitMQBus.csproj.CoreCompileInputs.cache
+D:\SCR\Backend\SCR\src\Infrastructure\EventBus\EventCMQBus\EventRabbitMQBus\bin\Debug\net5.0\EventRabbitMQBus.deps.json
+D:\SCR\Backend\SCR\src\Infrastructure\EventBus\EventCMQBus\EventRabbitMQBus\bin\Debug\net5.0\EventRabbitMQBus.dll
+D:\SCR\Backend\SCR\src\Infrastructure\EventBus\EventCMQBus\EventRabbitMQBus\bin\Debug\net5.0\ref\EventRabbitMQBus.dll
+D:\SCR\Backend\SCR\src\Infrastructure\EventBus\EventCMQBus\EventRabbitMQBus\bin\Debug\net5.0\EventRabbitMQBus.pdb
+D:\SCR\Backend\SCR\src\Infrastructure\EventBus\EventCMQBus\EventRabbitMQBus\bin\Debug\net5.0\EventBus.dll
+D:\SCR\Backend\SCR\src\Infrastructure\EventBus\EventCMQBus\EventRabbitMQBus\bin\Debug\net5.0\EventBus.pdb
+D:\SCR\Backend\SCR\src\Infrastructure\EventBus\EventCMQBus\EventRabbitMQBus\obj\Debug\net5.0\EventRabbitMQBus.csproj.CopyComplete
+D:\SCR\Backend\SCR\src\Infrastructure\EventBus\EventCMQBus\EventRabbitMQBus\obj\Debug\net5.0\EventRabbitMQBus.dll
+D:\SCR\Backend\SCR\src\Infrastructure\EventBus\EventCMQBus\EventRabbitMQBus\obj\Debug\net5.0\ref\EventRabbitMQBus.dll
+D:\SCR\Backend\SCR\src\Infrastructure\EventBus\EventCMQBus\EventRabbitMQBus\obj\Debug\net5.0\EventRabbitMQBus.pdb

@@ -1,0 +1,3 @@
+生成迁移脚本：dotnet ef migrations add InitialCreate --context PersistedGrantDbContext --output-dir Migrations/PersistedGrantDbContext
+
+将迁移更新到数据库：dotnet ef database update --context PersistedGrantDbContext

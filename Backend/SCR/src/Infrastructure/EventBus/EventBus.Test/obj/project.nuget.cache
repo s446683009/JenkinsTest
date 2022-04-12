@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "tBe0rnRKWQrv3swga+J04xVIvmA5YXYx5x8CUhTIv+/76JpGNFQsBKGbFczg9f6sv524cGK5ZODTatvAuusbew==",
+  "success": true,
+  "projectFilePath": "D:\\SCR\\Backend\\SCR\\src\\Infrastructure\\EventBus\\EventBus.Test\\EventBus.Test.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\SoloTravelling\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.0\\microsoft.extensions.dependencyinjection.6.0.0.nupkg.sha512",
+    "C:\\Users\\SoloTravelling\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\SoloTravelling\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.1\\microsoft.extensions.logging.abstractions.6.0.1.nupkg.sha512",
+    "C:\\Users\\SoloTravelling\\.nuget\\packages\\polly\\7.2.3\\polly.7.2.3.nupkg.sha512",
+    "C:\\Users\\SoloTravelling\\.nuget\\packages\\rabbitmq.client\\6.2.4\\rabbitmq.client.6.2.4.nupkg.sha512",
+    "C:\\Users\\SoloTravelling\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\SoloTravelling\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\SoloTravelling\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\SoloTravelling\\.nuget\\packages\\system.threading.channels\\4.7.1\\system.threading.channels.4.7.1.nupkg.sha512"
+  ],
+  "logs": []
+}

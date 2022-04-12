@@ -1,0 +1,12 @@
+D:\SCR\Backend\SCR\src\Services\Identity\Identity.Infrastructure\bin\Debug\net5.0\Identity.Infrastructure.deps.json
+D:\SCR\Backend\SCR\src\Services\Identity\Identity.Infrastructure\bin\Debug\net5.0\Identity.Infrastructure.dll
+D:\SCR\Backend\SCR\src\Services\Identity\Identity.Infrastructure\bin\Debug\net5.0\ref\Identity.Infrastructure.dll
+D:\SCR\Backend\SCR\src\Services\Identity\Identity.Infrastructure\bin\Debug\net5.0\Identity.Infrastructure.pdb
+D:\SCR\Backend\SCR\src\Services\Identity\Identity.Infrastructure\obj\Debug\net5.0\Identity.Infrastructure.csprojAssemblyReference.cache
+D:\SCR\Backend\SCR\src\Services\Identity\Identity.Infrastructure\obj\Debug\net5.0\Identity.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\SCR\Backend\SCR\src\Services\Identity\Identity.Infrastructure\obj\Debug\net5.0\Identity.Infrastructure.AssemblyInfoInputs.cache
+D:\SCR\Backend\SCR\src\Services\Identity\Identity.Infrastructure\obj\Debug\net5.0\Identity.Infrastructure.AssemblyInfo.cs
+D:\SCR\Backend\SCR\src\Services\Identity\Identity.Infrastructure\obj\Debug\net5.0\Identity.Infrastructure.csproj.CoreCompileInputs.cache
+D:\SCR\Backend\SCR\src\Services\Identity\Identity.Infrastructure\obj\Debug\net5.0\Identity.Infrastructure.dll
+D:\SCR\Backend\SCR\src\Services\Identity\Identity.Infrastructure\obj\Debug\net5.0\ref\Identity.Infrastructure.dll
+D:\SCR\Backend\SCR\src\Services\Identity\Identity.Infrastructure\obj\Debug\net5.0\Identity.Infrastructure.pdb
