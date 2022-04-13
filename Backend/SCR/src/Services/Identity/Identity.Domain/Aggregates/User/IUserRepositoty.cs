@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Identity.Application
+namespace Identity.Domain.Aggregates.User
 {
-    public interface IdentityApplication
+    public interface IUserRepositoty
     {
-        Task UserLogin(string userName,string password);
+
+
     }
 }

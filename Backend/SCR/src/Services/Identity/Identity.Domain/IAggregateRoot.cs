@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Identity.Domain
 {
-    public interface IAggregateRoot:IEntity
+    public interface IAggregateRoot
     {
     }
 }

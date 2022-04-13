@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace Identity.Application
 {
-    public interface IdentityApplication
+    class DefaultApplication : IdentityApplication
     {
-        Task UserLogin(string userName,string password);
+       
+
+        public async Task UserLogin(string userName, string password)
+        {
+          
+        }
     }
 }
