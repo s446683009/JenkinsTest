@@ -17,7 +17,8 @@ namespace Identity.Api
     {
         public static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).UseSerilog().Build();
+            var logger = CreateSerilogLogger();
+            var host = CreateHostBuilder(args).UseSerilog(logger).Build();
             host.Run();
         }
 
@@ -26,20 +27,20 @@ namespace Identity.Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                 
+                   
                 });
-        Serilog.ILogger CreateSerilogLogger(IConfiguration configuration)
+        static Serilog.ILogger CreateSerilogLogger()
         {
-            var seqServerUrl = configuration["Serilog:SeqServerUrl"];
-            var logstashUrl = configuration["Serilog:LogstashgUrl"];
+            //var seqServerUrl = configuration["Serilog:SeqServerUrl"];
+            //var logstashUrl = configuration["Serilog:LogstashgUrl"];
             return new LoggerConfiguration()
-                .MinimumLevel.Verbose()
+                .MinimumLevel.Information()
                 .Enrich.WithProperty("ApplicationContext", typeof(Program).Namespace)
                 .Enrich.FromLogContext()
-                .WriteTo.Console()
+                .WriteTo.Console().WriteTo.File("./log/log-.txt", rollingInterval: RollingInterval.Day)
                 //.WriteTo.Seq(string.IsNullOrWhiteSpace(seqServerUrl) ? "http://seq" : seqServerUrl)
                 //.WriteTo.Http(string.IsNullOrWhiteSpace(logstashUrl) ? "http://localhost:8080" : logstashUrl)
-                .ReadFrom.Configuration(configuration)
+                //.ReadFrom.Configuration(configuration)
                 .CreateLogger();
         }
 

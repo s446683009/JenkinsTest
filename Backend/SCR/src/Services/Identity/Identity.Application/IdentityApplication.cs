@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Identity.Application.Dto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace Identity.Application
 {
     public interface IdentityApplication
     {
-        Task UserLogin(string userName,string password);
+        Task<UserDto> UserLoginAsync(string userName,string password);
+
+        Task CreateUserAsync(RegisterRequest registerRquest);
     }
 }

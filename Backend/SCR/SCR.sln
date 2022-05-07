@@ -29,7 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventRabbitMQBus", "src\Inf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Test", "src\Infrastructure\EventBus\EventBus.Test\EventBus.Test.csproj", "{768980A9-F5CE-4AEE-A810-78BF45052B2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCR.Test", "SCR.Test\SCR.Test.csproj", "{AC666B89-91A8-4890-877B-52A0AA15F75F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCR.Test", "SCR.Test\SCR.Test.csproj", "{AC666B89-91A8-4890-877B-52A0AA15F75F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCR.Common", "src\Infrastructure\SCR.Common\SCR.Common.csproj", "{A7108A50-1F71-4034-9E95-99241428CD96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,10 @@ Global
 		{AC666B89-91A8-4890-877B-52A0AA15F75F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC666B89-91A8-4890-877B-52A0AA15F75F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC666B89-91A8-4890-877B-52A0AA15F75F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7108A50-1F71-4034-9E95-99241428CD96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7108A50-1F71-4034-9E95-99241428CD96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7108A50-1F71-4034-9E95-99241428CD96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7108A50-1F71-4034-9E95-99241428CD96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +97,7 @@ Global
 		{B5F16708-7900-4C43-A7EB-7C2130952E30} = {59097D80-75A1-465B-9EFC-CFA2ED6ACCF2}
 		{768980A9-F5CE-4AEE-A810-78BF45052B2A} = {59097D80-75A1-465B-9EFC-CFA2ED6ACCF2}
 		{AC666B89-91A8-4890-877B-52A0AA15F75F} = {0D051267-F91A-4BF1-83E0-F3B2E70C7ACD}
+		{A7108A50-1F71-4034-9E95-99241428CD96} = {0D051267-F91A-4BF1-83E0-F3B2E70C7ACD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D1517D07-67AC-4B0E-8C59-AA2D45A8CC62}

@@ -4,32 +4,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Identity.Domain.Aggregates.User.Entity
+namespace Identity.Domain.Aggregates.Entity
 {
-    public class User : BaseEntity,IAggregateRoot
+    public class User : BaseEntity, IAggregateRoot
     {
-        public string UserId { get; private set; }
+        public int UserId { get; private set; }
         public string Account { get; private set; }
         public string Password { get; private set; }
         public string PswEncryptCode { get; private set; }
-        public DateTime? CreateTime { get; private set; }
 
+        public string Mobile { get; private set; }
+        public string Email { get; private set; }
+        public string Descrption { get; private set; }
+        public int DefaultCompanyId { get; private set; }
         public bool IsActived { get; private set; }
-        public virtual ICollection<string> Permissions { get; private set; }
+        public string Avatar { get; private set; }
+        public DateTime? LastLoginTime { get; private set;  }
         public virtual ICollection<Company> Companies { get; private set; }
         public virtual ICollection<Role> Roles { get; private set; }
-        public User(string userId,string account,string password){
+        public User(int userId,string account,string password,string pswEncryptCode,
+            int defaultCompanyId,
+            string mobile
+            ){
             this.Account = account;
             this.UserId = userId;
+            this.PswEncryptCode = pswEncryptCode;
             this.Password = password;
+            this.DefaultCompanyId = defaultCompanyId;
+            this.Mobile = mobile;
+            this.Companies = new List<Company>();
+            this.Roles = new List<Role>();
+            this.IsActived = true;
+            this.CreatedTime = DateTime.Now;
         }
 
         public bool  ChangePassword(string newPassword,string pswEncryptCode) {
-            var pswBt = Encoding.UTF8.GetBytes(newPassword);
-            var encryptPsw=EncryptHelper.Hmac256(pswEncryptCode, pswBt);
-            this.Password = encryptPsw;
+
+            this.Password = EncrypyPsw(newPassword, pswEncryptCode) ;
             this.PswEncryptCode = PswEncryptCode;
             return true;
+        }
+
+        public static string EncrypyPsw(string password,string pswEncryptCode) {
+            var pswBt = Encoding.UTF8.GetBytes(password);
+            return EncryptHelper.Hmac256(pswEncryptCode, pswBt);
         }
 
         public void SetDisable() {
@@ -39,16 +57,26 @@ namespace Identity.Domain.Aggregates.User.Entity
         {
             this.IsActived = false;
         }
+
+
+        public bool LoginByPassword(string password) {
+            var pswBt = Encoding.UTF8.GetBytes(password);
+            var encryptPsw = EncryptHelper.Hmac256(this.PswEncryptCode, pswBt);
+            return this.LoginByEncryptedPassword(encryptPsw);
+
+        }
         public bool LoginByEncryptedPassword(string encryptedPassword)
         {
             if (string.IsNullOrEmpty(encryptedPassword))
                 throw new ArgumentNullException("The encrypted password cannot be empty");
             if (this.Password != encryptedPassword)
-                return false;
+                throw new Exception("账户或密码错误");
 
             this.ModifiedTime = DateTime.Now;
+            this.LastLoginTime = DateTime.Now;
+            
 
-           
+
             return true;
         }
 
@@ -57,26 +85,38 @@ namespace Identity.Domain.Aggregates.User.Entity
             this.IsDeleted = true;
             return true;
         }
-        public bool ChangeUserRoles(IList<Role> roles) {
+        public bool ChangeRoles(IList<Role> roles) {
             if (roles == null) {
                 throw new ArgumentException("User roles can not set empty");
             }
+            this.Roles.Clear();
             this.Roles = roles;
             this.ModifiedTime = DateTime.Now;
-            this.Permissions.Clear();
-            this.Permissions = roles.SelectMany(t=>t.Permissions).ToList();
+          
             return true;
         }
-        public bool ChangeUserCompanies(IList<Company> companies)
+        
+        public bool ChangeCompanies(IList<Company> companies)
         {
             if (companies == null)
             {
-                throw new ArgumentException("User roles can not set empty");
+                throw new ArgumentException("User company can not set empty");
             }
             this.Companies = companies;
             this.ModifiedTime = DateTime.Now;
-            this.Roles.Clear();
-            this.Permissions.Clear();
+      
+
+            return true;
+        }
+        public bool SetEmail(string email) {
+            this.Email = email;
+            this.ModifiedTime = DateTime.Now;
+            return true;
+        }
+
+        public bool ChangeAvatar(string imgUrl) {
+            this.Avatar = imgUrl;
+            this.ModifiedTime = DateTime.Now;
             return true;
         }
     }

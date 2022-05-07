@@ -10,7 +10,7 @@ using Identity.Api.Rquirements;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Authentication;
 
-namespace Identity.Api.AuthorizeHanders
+namespace Identity.Api.Handers
 {
     public class PermissionAuthorizationHandler : IAuthorizationHandler
     {
@@ -56,7 +56,7 @@ namespace Identity.Api.AuthorizeHanders
             {
                 context.Fail();
             }
-            
+            await Task.FromResult(1);
         }
     }
 }

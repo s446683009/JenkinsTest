@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
 
 namespace SCR.Test
 {
@@ -8,6 +11,8 @@ namespace SCR.Test
         {
             try
             {
+ 
+
                 SMTPHelper.SendEmail("william.li@plaza-network.com", "Test", "Test Email");
                 Console.ReadLine();
             }
