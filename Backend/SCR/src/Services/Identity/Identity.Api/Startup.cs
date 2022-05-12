@@ -18,7 +18,7 @@ using System.Text;
 using IdentityServer4.Services;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
-
+using Identity.Application;
 using System.Reflection;
 using Microsoft.eShopOnContainers.Services.Identity.API.Data;
 using IdentityServer4.EntityFramework.DbContexts;
@@ -35,6 +35,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using Identity.Application;
 using Identity.Domain.Aggregates;
 using Identity.Infrastructure.RDB.Repository;
+using Identity.Application.Queries;
 
 namespace Identity.Api
 {
@@ -128,6 +129,8 @@ namespace Identity.Api
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
             services.AddSingleton(jwtSettings);
+            var types = typeof(IQuery).Assembly.GetTypes();
+            services.AddQueries( types);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

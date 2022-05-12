@@ -9,8 +9,14 @@ namespace Identity.Application
 {
     public interface IdentityApplication
     {
+        //comand
         Task<UserDto> UserLoginAsync(string userName,string password);
 
         Task CreateUserAsync(RegisterRequest registerRquest);
+
+
+        //query
+        Task<UserProfileDto> GetProfileAsync(int userId);
+
     }
 }

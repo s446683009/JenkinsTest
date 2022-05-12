@@ -1,10 +1,12 @@
 ﻿
 using Identity.Api.Handlers;
+using Identity.Api.Models;
 using Identity.Api.Models.Api;
 using Identity.Api.Models.Api.request;
 using Identity.Api.Models.Configs;
 using Identity.Application;
 using Identity.Application.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -39,8 +41,8 @@ namespace Identity.Api.Controllers.Api
             var securityKey = _jwtSetting.Secret;
 
             var claims = new List<Claim>() {
-                new Claim("userName",user.Account),
-                new Claim("id",user.UserId.ToString())
+                new Claim(IdentityConst.userName,user.Account),
+                new Claim(IdentityConst.userId,user.UserId.ToString())
             };
 
             var token=TokenHelper.CreateToken(claims, securityKey);
@@ -50,6 +52,17 @@ namespace Identity.Api.Controllers.Api
 
 
         }
+        [Route("getProfile")]
+        [ProducesResponseType(typeof(UserDto), 200)]
+        [Authorize]
+        public async Task<ApiResult<UserDto>> GetProfileAsync() {
+            var userId = int.Parse(User.FindFirst(IdentityConst.userId).Value);
+            var profile = await _identityApp.GetProfileAsync(userId);
+            return ApiResult<UserDto>.Success(profile);
+        }
+
+
+
         [Route("register")]
         [HttpPost]
         [ProducesResponseType(typeof(bool),200)]

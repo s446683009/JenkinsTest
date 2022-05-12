@@ -9,21 +9,26 @@ using Identity.Domain.Aggregates.Entity;
 using Identity.Domain.SeedWork;
 using Identity.Domain.Aggregates;
 using Identity.Domain.Encrypt;
+using Identity.Application.Queries;
 
 namespace Identity.Application
 {
     public class DefaultApplication : IdentityApplication
     {
+
         private IUserRepository _userRepository;
         private ICompanyRepository _companyRepository;
         private IRoleRepository _roleRepository;
+        private IUserQuery _userQuery;
         public DefaultApplication(IUserRepository userRepository,
             ICompanyRepository companyRepository,
-            IRoleRepository roleRepository
+            IRoleRepository roleRepository,
+            IUserQuery userQuery
             ) {
             _userRepository = userRepository;
             _companyRepository = companyRepository;
             _roleRepository = roleRepository;
+            _userQuery = userQuery;
         }
         public async Task CreateUserAsync(RegisterRequest registerRquest)
         {
@@ -101,6 +106,11 @@ namespace Identity.Application
             return ConvertUserDto(user);
 
         }
+
+        public async Task<UserProfileDto> GetProfileAsync(int userId) {
+          return await  _userQuery.GetProfileAsync(userId);
+        }
+
         private static UserDto ConvertUserDto(User user)
         {
             if (user == null)

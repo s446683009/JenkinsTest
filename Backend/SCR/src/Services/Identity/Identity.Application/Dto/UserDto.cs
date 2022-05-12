@@ -16,4 +16,7 @@ namespace Identity.Application.Dto
 
 
     }
+    public class UserProfileDto : UserDto { 
+    
+    }
 }

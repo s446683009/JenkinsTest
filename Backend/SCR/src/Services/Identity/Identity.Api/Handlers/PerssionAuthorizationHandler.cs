@@ -33,7 +33,8 @@ namespace Identity.Api.Handers
            
             if (descriptor == null)
             {
-                var en = context.Resource as Endpoint;
+                var ht = context.Resource as HttpContext;
+                var en = ht.GetEndpoint();
             
                 descriptor=en.Metadata.GetMetadata<ControllerActionDescriptor>();
             }
@@ -42,14 +43,17 @@ namespace Identity.Api.Handers
                 return;
                 permission =
                    $"{descriptor.ControllerTypeInfo.Namespace}.{descriptor.ControllerTypeInfo.Name}.{descriptor.MethodInfo.Name}";
-                context.Succeed(new PemissionRequirement(permission));
+               
 
             //如果已经登录
             if (context.HasSucceeded)
             {
                 //过期需要吗？
                 //验证下权限
- 
+
+
+
+                context.Succeed(new PemissionRequirement(permission));
             }
 
             else
