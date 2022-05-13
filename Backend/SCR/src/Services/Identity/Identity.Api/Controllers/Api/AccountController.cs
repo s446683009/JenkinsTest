@@ -52,6 +52,7 @@ namespace Identity.Api.Controllers.Api
 
 
         }
+        [HttpGet]
         [Route("getProfile")]
         [ProducesResponseType(typeof(UserDto), 200)]
         [Authorize]

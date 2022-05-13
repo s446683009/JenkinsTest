@@ -119,6 +119,20 @@ namespace Identity.Api
             });
            
             services.AddControllers();
+            services.AddCors(options =>
+            {
+                // Policy 名稱 CorsPolicy 是自訂的，可以自己改
+                options.AddPolicy("qwer", policy =>
+                {
+                    // 設定允許跨域的來源，有多個的話可以用 `,` 隔開
+
+                    policy
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowAnyOrigin();
+                });
+            });
+
             //services.AddControllersWithViews();
             //services.AddRazorPages();
             AddCustomSwagger(services,Configuration);
@@ -142,7 +156,8 @@ namespace Identity.Api
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseDeveloperExceptionPage();
+                //app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -189,7 +204,7 @@ namespace Identity.Api
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-           
+            app.UseCors("qwer");
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseIdentityServer();
@@ -199,7 +214,7 @@ namespace Identity.Api
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-
+          
             app.UseSwagger()
          .UseSwaggerUI(c =>
          {
