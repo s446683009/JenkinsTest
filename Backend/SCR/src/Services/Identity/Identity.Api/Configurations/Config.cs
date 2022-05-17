@@ -41,8 +41,12 @@ namespace Identity.Api.Configurations
                 {
                     ClientId = "js",
                     ClientName = "eShop SPA OpenId Client",
-                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowedGrantTypes = GrantTypes.ImplicitAndClientCredentials,
                     AllowAccessTokensViaBrowser = true,
+                    ClientSecrets =
+                    {
+                        new Secret("123456".Sha256())
+                    },
                     RedirectUris =           { $"{clientsUrl["Spa"]}/" },
                     RequireConsent = false,
                     PostLogoutRedirectUris = { $"{clientsUrl["Spa"]}/" },
