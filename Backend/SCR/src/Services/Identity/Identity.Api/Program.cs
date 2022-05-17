@@ -34,10 +34,10 @@ namespace Identity.Api
             //var seqServerUrl = configuration["Serilog:SeqServerUrl"];
             //var logstashUrl = configuration["Serilog:LogstashgUrl"];
             return new LoggerConfiguration()
-                .MinimumLevel.Information()
+                .MinimumLevel.Debug()
                 .Enrich.WithProperty("ApplicationContext", typeof(Program).Namespace)
                 .Enrich.FromLogContext()
-                .WriteTo.Console().WriteTo.File("./log/log-.txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.Console().WriteTo.File("./log/log-.txt", rollingInterval: RollingInterval.Hour)
                 //.WriteTo.Seq(string.IsNullOrWhiteSpace(seqServerUrl) ? "http://seq" : seqServerUrl)
                 //.WriteTo.Http(string.IsNullOrWhiteSpace(logstashUrl) ? "http://localhost:8080" : logstashUrl)
                 //.ReadFrom.Configuration(configuration)
