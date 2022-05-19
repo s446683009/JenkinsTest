@@ -84,7 +84,9 @@ namespace Identity.Api
             // Adds IdentityServer
             services.AddIdentityServer(x =>
             {
-          
+                x.UserInteraction.LoginUrl = "/account/login";
+                x.UserInteraction.LoginUrl = "/account/loginOut";
+                x
                 x.IssuerUri = "http://159.75.212.177:83/";
                 x.Authentication.CookieLifetime = TimeSpan.FromHours(2);
             })
