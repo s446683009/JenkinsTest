@@ -12,7 +12,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Identity.Api.Rquirements;
-using Identity.Api.Models.Configs;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using IdentityServer4.Services;
@@ -32,10 +31,10 @@ using Microsoft.AspNetCore.Http;
 using Identity.Api.Models.Api;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using Identity.Application;
 using Identity.Domain.Aggregates;
 using Identity.Infrastructure.RDB.Repository;
 using Identity.Application.Queries;
+using Identity.Api.Configurations;
 
 namespace Identity.Api
 {
@@ -53,6 +52,8 @@ namespace Identity.Api
         {
 
             var jwtSettings= Configuration.GetSection("JwtSetttings").Get<JwtSetting>();
+            var identitySetting= Configuration.GetSection("IdentitySettings").Get<IdentityServerConfig>();
+
             var connectString = Configuration.GetConnectionString("Identity");
             services.AddSingleton(jwtSettings);
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
@@ -84,9 +85,12 @@ namespace Identity.Api
             // Adds IdentityServer
             services.AddIdentityServer(x =>
             {
-                x.UserInteraction.LoginUrl = "/account/login";
-                x.UserInteraction.LoginUrl = "/account/loginOut";
-                
+                //使用AddCookieAuthentication 会默认赋值 UserInteraction 
+                //使用jwt 则需要额外配置
+                x.UserInteraction.LoginUrl = identitySetting.UserInteraction?.LoginUrl;
+                x.UserInteraction.LogoutUrl = identitySetting.UserInteraction?.LogoutUrl;
+
+                x.UserInteraction.LoginReturnUrlParameter = identitySetting.UserInteraction?.LoginReturnUrlParameter;
                 x.IssuerUri = "http://159.75.212.177:83/";
                 x.Authentication.CookieLifetime = TimeSpan.FromHours(2);
             })

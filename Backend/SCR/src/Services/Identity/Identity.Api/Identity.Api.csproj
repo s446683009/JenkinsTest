@@ -28,8 +28,8 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Api\Models\" />
+    <Folder Include="Models\Configs\" />
     <Folder Include="Seeds\" />
-    <Folder Include="Configurations\" />
   </ItemGroup>
 
   <ItemGroup>

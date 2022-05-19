@@ -3,7 +3,7 @@ using Identity.Api.Handlers;
 using Identity.Api.Models;
 using Identity.Api.Models.Api;
 using Identity.Api.Models.Api.request;
-using Identity.Api.Models.Configs;
+using Identity.Api.Configurations;
 using Identity.Application;
 using Identity.Application.Dto;
 using Microsoft.AspNetCore.Authorization;

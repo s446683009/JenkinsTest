@@ -12,7 +12,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Identity.Api.Models.Configs;
+using Identity.Api.Configurations;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
