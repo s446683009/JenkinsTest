@@ -1,4 +1,5 @@
-﻿using Identity.Domain.Aggregates.Entity;
+﻿using Identity.Domain.Aggregates;
+using Identity.Domain.Aggregates.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -18,13 +19,27 @@ namespace Identity.Infrastructure.RDB.Configurations
                 .HasDefaultValueSql("nextval('\"UserId\"')");
             builder.Property(t => t.Mobile).HasMaxLength(50);
             builder.Property(t => t.Email).HasMaxLength(50);
-
-
-            builder.HasMany(t=>t.Companies).WithMany(t=>t.Users).UsingEntity(t=> {
-                t.ToTable("User_Company");
+        }
+    }
+    public class UserCompanyRelationMapping : IEntityTypeConfiguration<UserCompanyRelation>
+    {
+        public void Configure(EntityTypeBuilder<UserCompanyRelation> builder)
+        {
+            builder.ToTable("UserCompanyRelation");
+            builder.HasKey(t=>new { 
+                t.CompanyId,
+                t.UserId
             });
-            builder.HasMany(t => t.Roles).WithMany(t=>t.Users).UsingEntity(t => {
-                t.ToTable("User_Role");
+        }
+    }
+    public class UserRoleRelationMapping : IEntityTypeConfiguration<UserRoleRelation>
+    {
+        public void Configure(EntityTypeBuilder<UserRoleRelation> builder)
+        {
+            builder.ToTable("UserRoleRelation");
+            builder.HasKey(t => new {
+                t.RoleId,
+                t.UserId
             });
         }
     }

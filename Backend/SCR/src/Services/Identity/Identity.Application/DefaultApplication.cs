@@ -42,10 +42,10 @@ namespace Identity.Application
             {
                 throw new Exception("user relation company can not find");
             }
-            user.ChangeCompanies(companies);
+            user.ChangeCompanies(companies.Select(t=>t.CompanyId).ToList());
             if (registerRquest.RoleIds.Count() > 0) {
                 var roles = await _roleRepository.GetRolesByIdsAsync(registerRquest.RoleIds);
-                user.ChangeRoles(roles);
+                user.ChangeRoles(roles.Select(t => t.RoleId).ToList());
             }
             await _userRepository.AddUserAsync(user);
             await _userRepository.UnitOfWork.SaveEntitiesAsync();

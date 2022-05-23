@@ -40,6 +40,9 @@ namespace Identity.Infrastructure.RDB
             modelBuilder.ApplyConfiguration(new RoleMapping());
             modelBuilder.ApplyConfiguration(new CompanyMapping());
             modelBuilder.ApplyConfiguration(new PermissionMapping());
+            modelBuilder.ApplyConfiguration(new UserCompanyRelationMapping());
+            modelBuilder.ApplyConfiguration(new UserRoleRelationMapping());
+            modelBuilder.ApplyConfiguration(new  RolePermissionRelationMapping());
             base.OnModelCreating(modelBuilder);
         }
        

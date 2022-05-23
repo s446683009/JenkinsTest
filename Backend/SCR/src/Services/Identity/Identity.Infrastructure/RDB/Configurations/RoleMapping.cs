@@ -17,8 +17,21 @@ namespace Identity.Infrastructure.RDB.Configurations
             builder.HasKey(t => t.RoleId);
             builder.Property(t => t.RoleId).HasDefaultValueSql("nextval('\"RoleId\"')");
             builder.Property(t => t.Name).IsRequired();
-            builder.HasOne(t => t.Company).WithMany().HasForeignKey(t => t.CompanyId);
-            builder.HasMany(t => t.Permissions).WithMany(t => t.Roles).UsingEntity(t =>t.ToTable("Role_Permission"));
+           
+        }
+
+    }
+    public class RolePermissionRelationMapping : IEntityTypeConfiguration<RolePermissionRelation>
+    {
+        public void Configure(EntityTypeBuilder<RolePermissionRelation> builder)
+        {
+            builder.ToTable("RolePermissionRelation");
+            builder.HasKey(t => new {
+                t.RoleId,
+                t.PermissionId
+            });
         }
     }
+
+
 }

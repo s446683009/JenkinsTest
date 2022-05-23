@@ -11,7 +11,7 @@ namespace Identity.Domain.Aggregates
     {
         public int CompanyId { get; private set; }
         public string Name { get; private set; }
-        public virtual ICollection<User> Users { get; private set; }
+       
         
 
         public Company(int companyId,string name) {

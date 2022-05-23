@@ -10,7 +10,7 @@ namespace Identity.Domain.Aggregates
     {
         public int PermissionId { get;  set; }
         public string Name { get; private set; }
-        public virtual ICollection<Role> Roles { get; set; }
+ 
         public virtual ICollection<PermissionAction> Actions { get; private set; }
 
     }

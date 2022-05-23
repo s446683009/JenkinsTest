@@ -19,9 +19,9 @@ namespace Identity.Domain.Aggregates.Entity
         public int DefaultCompanyId { get; private set; }
         public bool IsActived { get; private set; }
         public string Avatar { get; private set; }
-        public DateTime? LastLoginTime { get; private set;  }
-        public virtual ICollection<Company> Companies { get; private set; }
-        public virtual ICollection<Role> Roles { get; private set; }
+        public DateTime? LastLoginTime { get; private set; }
+        public virtual ICollection<UserCompanyRelation> Companies { get;set;} 
+        public virtual ICollection<UserRoleRelation> Roles { get; set; }
         public User(int userId,string account,string password,string pswEncryptCode,
             int defaultCompanyId,
             string mobile
@@ -32,8 +32,8 @@ namespace Identity.Domain.Aggregates.Entity
             this.Password = password;
             this.DefaultCompanyId = defaultCompanyId;
             this.Mobile = mobile;
-            this.Companies = new List<Company>();
-            this.Roles = new List<Role>();
+            this.Companies = new List<UserCompanyRelation>();
+            //this.Roles = new List<Role>();
             this.IsActived = true;
             this.CreatedTime = DateTime.Now;
         }
@@ -85,24 +85,30 @@ namespace Identity.Domain.Aggregates.Entity
             this.IsDeleted = true;
             return true;
         }
-        public bool ChangeRoles(IList<Role> roles) {
+        public bool ChangeRoles(IList<int> roles) {
             if (roles == null) {
                 throw new ArgumentException("User roles can not set empty");
             }
             this.Roles.Clear();
-            this.Roles = roles;
+            this.Roles = roles.Select(t => new UserRoleRelation()
+            {
+                RoleId = t
+            }).ToList();
             this.ModifiedTime = DateTime.Now;
           
             return true;
         }
         
-        public bool ChangeCompanies(IList<Company> companies)
+        public bool ChangeCompanies(IList<int> companies)
         {
             if (companies == null)
             {
                 throw new ArgumentException("User company can not set empty");
             }
-            this.Companies = companies;
+            this.Companies.Clear();
+            this.Companies = companies.Select(t=>new UserCompanyRelation() { 
+                CompanyId=t
+            }).ToList();
             this.ModifiedTime = DateTime.Now;
       
 

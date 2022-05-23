@@ -120,7 +120,6 @@ namespace Identity.Api
             //.Services.AddTransient<IProfileService, ProfileService>();
             services.AddDbContext<IdentityContext>(t => {
                 t.UseNpgsql(connectString, options => {
-                   
                     options.MigrationsAssembly(typeof(IdentityContext).GetTypeInfo().Assembly.GetName().Name);
                 });
             });
@@ -132,7 +131,6 @@ namespace Identity.Api
                 options.AddPolicy("qwer", policy =>
                 {
                     // 設定允許跨域的來源，有多個的話可以用 `,` 隔開
-
                     policy
                             .AllowAnyHeader()
                             .AllowAnyMethod()

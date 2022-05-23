@@ -20,7 +20,7 @@ namespace Identity.Domain.Aggregates
         public int CompanyId { get; private set; }
    
         public virtual Company Company { get; private set; }
-        public virtual ICollection<Permission> Permissions { get; private set; }
+      
         public virtual ICollection<User> Users { get; private set; }
 
     }
