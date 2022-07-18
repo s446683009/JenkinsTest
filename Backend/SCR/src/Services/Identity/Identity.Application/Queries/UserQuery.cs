@@ -1,4 +1,5 @@
 ﻿using Identity.Application.Dto;
+using Identity.Application.Dto.Requests;
 using Identity.Domain.Aggregates;
 using Identity.Domain.Aggregates.Entity;
 using Identity.Infrastructure.RDB;
@@ -23,11 +24,38 @@ namespace Identity.Application.Queries
         }
         public async Task<UserProfileDto> GetProfileAsync(int userId) {
             var user = await _context.Users.FindAsync(userId);
+            var roleList=_context.Roles.Where(t=>!t.IsDeleted).ToList();
+          
+
+
             if (user == null) {
-                throw new NullReferenceException("用户不存在");
+                throw new Exception("找不到用户");
             }
-            return ConvertUserProfileDto(user);
+            var result= ConvertUserProfileDto(user);
+            result.Roles = user.Roles.Select(t=>new RoleDto() { 
+                RoleId=t.RoleId,
+                RoleName=roleList.FirstOrDefault(c=>c.RoleId==t.RoleId)?.Name
+            });
+
+            return result;
         }
+
+        public Task<IEnumerable<UserListDto>> GetUsers(UserSearchRequest userSearchRequest)
+        {
+            var userQuery = _context.Users.Where(t => t.IsDeleted == false).AsQueryable();
+            if (!string.IsNullOrEmpty(userSearchRequest.UserName)) {
+                userQuery = userQuery.Where(t => t.Account.Contains(userSearchRequest.UserName));
+            }
+
+            if (userSearchRequest.CompanyId.HasValue) {
+                userQuery = userQuery.Where(t => t.Companies.Any(c=>c.CompanyId== userSearchRequest.CompanyId.Value));
+            }
+
+            return Task.FromResult(new List<UserListDto>().AsEnumerable());
+
+
+        }
+
         private UserProfileDto ConvertUserProfileDto(User user) {
             return new UserProfileDto()
             {

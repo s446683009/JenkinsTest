@@ -17,6 +17,13 @@ namespace Identity.Application.Dto
 
     }
     public class UserProfileDto : UserDto { 
+        public IEnumerable<RoleDto> Roles { get; set; }
+    }
+
+    public class UserListDto : UserDto { 
     
     }
+
+
+
 }

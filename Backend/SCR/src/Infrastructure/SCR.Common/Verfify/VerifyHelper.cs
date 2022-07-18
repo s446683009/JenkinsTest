@@ -10,7 +10,7 @@ namespace SCR.Common
     {
 
         public static bool VerifyMobile(string mobile) {
-           return Regex.IsMatch(mobile, @"^1[3|4|5|7|8][0-9]{9}$");
+           return Regex.IsMatch(mobile, @"^1[3456789]\d{9}$");
         }
     }
 }

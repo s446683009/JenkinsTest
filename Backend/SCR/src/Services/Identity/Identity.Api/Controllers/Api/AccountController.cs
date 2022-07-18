@@ -35,8 +35,6 @@ namespace Identity.Api.Controllers.Api
             if (string.IsNullOrWhiteSpace(loginRequest.userName) || string.IsNullOrWhiteSpace(loginRequest.password)) {
                 ApiResult<string>.Error("username or password can not be empty");
             }
-
-            
             var user=await _identityApp.UserLoginAsync(loginRequest.userName,loginRequest.password);
             var securityKey = _jwtSetting.Secret;
 
@@ -62,7 +60,7 @@ namespace Identity.Api.Controllers.Api
             return ApiResult<UserDto>.Success(profile);
         }
 
-
+       
 
         [Route("register")]
         [HttpPost]
@@ -72,7 +70,6 @@ namespace Identity.Api.Controllers.Api
             try
             {
                 await _identityApp.CreateUserAsync(registerRequest);
-
                 return ApiResult<bool>.Success(true);
             } catch (Exception e) {
 

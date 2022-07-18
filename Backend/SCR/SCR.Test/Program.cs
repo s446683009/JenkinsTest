@@ -2,18 +2,22 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text.Encodings.Web;
 
 namespace SCR.Test
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
             try
             {
- 
+                string str = null;
 
-                SMTPHelper.SendEmail("william.li@plaza-network.com", "Test", "Test Email");
+                str.AddQueryString("1","2");
+
+                Console.WriteLine(str);
+                //SMTPHelper.SendEmail("william.li@plaza-network.com", "Test", "Test Email");
                 Console.ReadLine();
             }
             catch (Exception e) {
@@ -21,5 +25,25 @@ namespace SCR.Test
             }
          
         }
+        public static string AddQueryString(this string url, string query)
+        {
+            if (!url.Contains("?"))
+            {
+                url += "?";
+            }
+            else if (!url.EndsWith("&"))
+            {
+                url += "&";
+            }
+
+            return url + query;
+        }
+
+
+        public static string AddQueryString(this string url, string name, string value)
+        {
+            return url.AddQueryString(name + "=" + UrlEncoder.Default.Encode(value));
+        }
     }
+
 }

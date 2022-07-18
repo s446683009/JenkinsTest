@@ -1,4 +1,5 @@
 ﻿using Identity.Application.Dto;
+using Identity.Application.Dto.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace Identity.Application.Queries
     public interface IUserQuery:IQuery
     {
         Task<UserProfileDto> GetProfileAsync(int userId);
+        Task<IEnumerable<UserListDto>> GetUsers(UserSearchRequest userSearchRequest);
     }
 }
