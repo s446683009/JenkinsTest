@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Infrastructure\EventBus\EventBus\EventBus.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\SCR.Common\SCR.Common.csproj" />
   </ItemGroup>
 
 </Project>

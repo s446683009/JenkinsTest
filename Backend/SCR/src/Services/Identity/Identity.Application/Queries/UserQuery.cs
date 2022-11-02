@@ -1,13 +1,14 @@
-﻿using Identity.Application.Dto;
-using Identity.Application.Dto.Requests;
+﻿
 using Identity.Domain.Aggregates;
-using Identity.Domain.Aggregates.Entity;
+using Identity.Domain.Aggregates.User;
 using Identity.Infrastructure.RDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Identity.Application.Dtos;
+using Identity.Application.Dtos.Requests;
 
 namespace Identity.Application.Queries
 {
@@ -24,12 +25,12 @@ namespace Identity.Application.Queries
         }
         public async Task<UserProfileDto> GetProfileAsync(int userId) {
             var user = await _context.Users.FindAsync(userId);
-            var roleList=_context.Roles.Where(t=>!t.IsDeleted).ToList();
+            var roleList=_context.Roles.ToList();
           
 
 
             if (user == null) {
-                throw new Exception("找不到用户");
+                throw new NullReferenceException("找不到用户");
             }
             var result= ConvertUserProfileDto(user);
             result.Roles = user.Roles.Select(t=>new RoleDto() { 
@@ -42,13 +43,13 @@ namespace Identity.Application.Queries
 
         public Task<IEnumerable<UserListDto>> GetUsers(UserSearchRequest userSearchRequest)
         {
-            var userQuery = _context.Users.Where(t => t.IsDeleted == false).AsQueryable();
+            var userQuery = _context.Users.Where(t => !t.IsDeleted).AsQueryable();
             if (!string.IsNullOrEmpty(userSearchRequest.UserName)) {
                 userQuery = userQuery.Where(t => t.Account.Contains(userSearchRequest.UserName));
             }
 
             if (userSearchRequest.CompanyId.HasValue) {
-                userQuery = userQuery.Where(t => t.Companies.Any(c=>c.CompanyId== userSearchRequest.CompanyId.Value));
+                userQuery = userQuery.Where(t => t.Companies.Any(c => c.CompanyId == userSearchRequest.CompanyId));
             }
 
             return Task.FromResult(new List<UserListDto>().AsEnumerable());

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Identity.Application.Dto.Requests
+namespace Identity.Application.Dtos.Requests
 {
     public class UserSearchRequest:SearchRequest
     {

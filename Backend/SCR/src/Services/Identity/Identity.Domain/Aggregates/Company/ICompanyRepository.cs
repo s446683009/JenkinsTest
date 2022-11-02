@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Identity.Domain.Aggregates
+namespace Identity.Domain.Aggregates.Company
 {
     public interface ICompanyRepository:IRepository<Company>
     {

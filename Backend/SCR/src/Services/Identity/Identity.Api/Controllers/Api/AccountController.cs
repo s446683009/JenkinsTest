@@ -1,11 +1,5 @@
 ﻿
-using Identity.Api.Handlers;
-using Identity.Api.Models;
-using Identity.Api.Models.Api;
-using Identity.Api.Models.Api.request;
-using Identity.Api.Configurations;
-using Identity.Application;
-using Identity.Application.Dto;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,18 +9,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Identity.Api.Configurations;
+using Identity.Api.Handlers;
+using Identity.Api.Models;
+using Identity.Api.Models.Api;
+using Identity.Api.Models.Api.request;
+using Identity.Application.Dtos;
+using Identity.IApplication;
+using Identity.IApplication.Dtos.Requests;
 
-namespace Identity.Api.Controllers.Api
+namespace IUser.Api.Controllers.Api
 {
     [Route("api/v1/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private IdentityApplication _identityApp;
+        private IUserApplication _IUserApp;
         private JwtSetting _jwtSetting;
-        public  AccountController(IdentityApplication identityApplication, JwtSetting jwtSetting)
+        public  AccountController(IUserApplication IUserApplication, JwtSetting jwtSetting)
         {
-            _identityApp = identityApplication;
+            _IUserApp = IUserApplication;
             _jwtSetting = jwtSetting;
         }
         [Route("login")]
@@ -35,7 +37,7 @@ namespace Identity.Api.Controllers.Api
             if (string.IsNullOrWhiteSpace(loginRequest.userName) || string.IsNullOrWhiteSpace(loginRequest.password)) {
                 ApiResult<string>.Error("username or password can not be empty");
             }
-            var user=await _identityApp.UserLoginAsync(loginRequest.userName,loginRequest.password);
+            var user=await _IUserApp.UserLoginAsync(loginRequest.userName,loginRequest.password);
             var securityKey = _jwtSetting.Secret;
 
             var claims = new List<Claim>() {
@@ -51,12 +53,12 @@ namespace Identity.Api.Controllers.Api
 
         }
         [HttpGet]
-        [Route("getProfile")]
+        [Route("profile")]
         [ProducesResponseType(typeof(UserDto), 200)]
         [Authorize]
         public async Task<ApiResult<UserDto>> GetProfileAsync() {
             var userId = int.Parse(User.FindFirst(IdentityConst.userId).Value);
-            var profile = await _identityApp.GetProfileAsync(userId);
+            var profile = await _IUserApp.GetProfileAsync(userId);
             return ApiResult<UserDto>.Success(profile);
         }
 
@@ -69,7 +71,7 @@ namespace Identity.Api.Controllers.Api
         {
             try
             {
-                await _identityApp.CreateUserAsync(registerRequest);
+                await _IUserApp.CreateUserAsync(registerRequest);
                 return ApiResult<bool>.Success(true);
             } catch (Exception e) {
 

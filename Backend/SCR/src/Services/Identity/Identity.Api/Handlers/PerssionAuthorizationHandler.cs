@@ -14,22 +14,12 @@ namespace Identity.Api.Handers
 {
     public class PermissionAuthorizationHandler : IAuthorizationHandler
     {
-        public IAuthenticationSchemeProvider Schemes;
-      
-        /// <summary>
-        /// 构造函数注入
-        /// </summary>
-        public PermissionAuthorizationHandler(IAuthenticationSchemeProvider schemes)
-        {
-            Schemes = schemes;
-           
-        }
 
         public async Task HandleAsync(AuthorizationHandlerContext context)
         {
             var filterContext = context.Resource as AuthorizationFilterContext;
             var descriptor = filterContext?.ActionDescriptor as ControllerActionDescriptor;
-            string permission = string.Empty;
+            var permission = string.Empty;
            
             if (descriptor == null)
             {
@@ -41,7 +31,7 @@ namespace Identity.Api.Handers
 
             if (descriptor == null)
                 return;
-                permission =
+            permission =
                    $"{descriptor.ControllerTypeInfo.Namespace}.{descriptor.ControllerTypeInfo.Name}.{descriptor.MethodInfo.Name}";
                
 
@@ -50,9 +40,6 @@ namespace Identity.Api.Handers
             {
                 //过期需要吗？
                 //验证下权限
-
-
-
                 context.Succeed(new PemissionRequirement(permission));
             }
 

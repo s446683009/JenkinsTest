@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Identity.Application.Dto
+namespace Identity.Application.Dtos
 {
     public class RoleDto
     {

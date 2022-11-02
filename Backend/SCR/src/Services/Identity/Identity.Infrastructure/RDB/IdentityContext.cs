@@ -1,5 +1,7 @@
-﻿using Identity.Domain.Aggregates;
-using Identity.Domain.Aggregates.Entity;
+﻿using Identity.Domain.Aggregates.Company;
+using Identity.Domain.Aggregates.User;
+using Identity.Domain.Aggregates.Role;
+using Identity.Domain.Aggregates.Permission;
 using Identity.Domain.SeedWork;
 using Identity.Infrastructure.RDB.Configurations;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +21,7 @@ namespace Identity.Infrastructure.RDB
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Company> Companys { get; set; }
+        public DbSet<Company> Permissons { get; set; }
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
         {
             var result = await base.SaveChangesAsync(cancellationToken);

@@ -1,27 +1,22 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Identity.Api.Rquirements;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using IdentityServer4.Services;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
+
 using Microsoft.EntityFrameworkCore;
 using Identity.Application;
 using System.Reflection;
-using Microsoft.eShopOnContainers.Services.Identity.API.Data;
-using IdentityServer4.EntityFramework.DbContexts;
-using Microsoft.EntityFrameworkCore.Storage;
+using System.Threading.Tasks;
 using Identity.Infrastructure.RDB;
 using Identity.Api.Handers;
 using Identity.Api.Handlers;
@@ -30,11 +25,14 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using Identity.Api.Models.Api;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using Identity.Domain.Aggregates;
+using Identity.Domain.Aggregates.User;
+using Identity.Domain.Aggregates.Company;
+using Identity.Domain.Aggregates.Role;
 using Identity.Infrastructure.RDB.Repository;
 using Identity.Application.Queries;
 using Identity.Api.Configurations;
+using Identity.IApplication;
+using Microsoft.AspNetCore.Identity;
 
 namespace Identity.Api
 {
@@ -45,7 +43,7 @@ namespace Identity.Api
             Configuration = configuration;
         }
        
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -53,31 +51,43 @@ namespace Identity.Api
 
             var jwtSettings= Configuration.GetSection("JwtSetttings").Get<JwtSetting>();
             var identitySetting= Configuration.GetSection("IdentitySettings").Get<IdentityServerConfig>();
-
             var connectString = Configuration.GetConnectionString("Identity");
             services.AddSingleton(jwtSettings);
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
             //
             services.AddControllersWithViews();
 
-            services.AddAuthentication(options=> {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            services.AddAuthentication(options=>
+                {
+                  
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    //添加后未登录302 变更为401
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    //
             })
-            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,options=> {
+            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,options=>
+            {
+           
                 options.TokenValidationParameters= new TokenValidationParameters()
                 {
+                    
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = jwtSettings.Issuer,
                     ValidAudience = jwtSettings.Audience,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret)),
                     ValidateIssuer = false,
                     ValidateAudience = false,
-                    
+
                 };
                 options.SaveToken = true;
             });
+         
+          
 
+            
             services.AddAuthorization(options=> {
+          
                 options.AddPolicy("permission",p=> {
                     p.Requirements.Add(new PemissionRequirement());
                 });
@@ -85,13 +95,14 @@ namespace Identity.Api
             // Adds IdentityServer
             services.AddIdentityServer(x =>
             {
+               
                 //使用AddCookieAuthentication 会默认赋值 UserInteraction 
                 //使用jwt 则需要额外配置
                 x.UserInteraction.LoginUrl = identitySetting.UserInteraction?.LoginUrl;
                 x.UserInteraction.LogoutUrl = identitySetting.UserInteraction?.LogoutUrl;
-
+          
                 x.UserInteraction.LoginReturnUrlParameter = identitySetting.UserInteraction?.LoginReturnUrlParameter;
-                x.IssuerUri = "http://159.75.212.177:83/";
+                x.IssuerUri = identitySetting.IssueUrl;
                 x.Authentication.CookieLifetime = TimeSpan.FromHours(2);
             })
 
@@ -128,13 +139,11 @@ namespace Identity.Api
             services.AddCors(options =>
             {
                 // Policy 名稱 CorsPolicy 是自訂的，可以自己改
-                options.AddPolicy("qwer", policy =>
+                options.AddPolicy("CorsPolicy", policy =>
                 {
                     // 設定允許跨域的來源，有多個的話可以用 `,` 隔開
-                    policy
-                            .AllowAnyHeader()
-                            .AllowAnyMethod()
-                            .AllowAnyOrigin();
+                    policy.AllowAnyHeader().AllowAnyMethod()
+                    .AllowAnyOrigin();
                 });
             });
 
@@ -143,10 +152,11 @@ namespace Identity.Api
             AddCustomSwagger(services,Configuration);
 
             services.AddTransient<IAuthorizationHandler,PermissionAuthorizationHandler>();
-            services.AddScoped<IdentityApplication,DefaultApplication>();
+            services.AddScoped<IUserApplication,UserApplication>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<UserService,UserService>();
             services.AddSingleton(jwtSettings);
             var types = typeof(IQuery).Assembly.GetTypes();
             services.AddQueries( types);
@@ -170,8 +180,8 @@ namespace Identity.Api
                 errApp.Run(async context =>
                 {
                     var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
-                    Exception exception = exceptionHandlerPathFeature.Error;
-                    if (exception.InnerException != null)
+                    Exception exception = exceptionHandlerPathFeature?.Error;
+                    if (exception?.InnerException != null)
                     {
                         exception = exception.InnerException;
                     }
@@ -193,7 +203,7 @@ namespace Identity.Api
                     {
                         Code = ApiResultCode.Fail,
                         Data = false,
-                        Message = exception.Message
+                        Message = exception?.Message
                     };
 
 

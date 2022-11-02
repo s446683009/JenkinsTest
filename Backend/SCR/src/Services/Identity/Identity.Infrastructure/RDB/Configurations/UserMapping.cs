@@ -1,5 +1,5 @@
 ﻿using Identity.Domain.Aggregates;
-using Identity.Domain.Aggregates.Entity;
+using Identity.Domain.Aggregates.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

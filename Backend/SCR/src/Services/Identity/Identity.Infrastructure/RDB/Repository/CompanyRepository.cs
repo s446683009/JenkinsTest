@@ -1,4 +1,4 @@
-﻿using Identity.Domain.Aggregates;
+﻿using Identity.Domain.Aggregates.Company;
 using Identity.Domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
 using System;

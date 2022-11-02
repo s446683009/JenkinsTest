@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Identity.Application.Dto
+namespace Identity.Application.Dtos
 {
     public class UserDto
     {
@@ -16,7 +16,12 @@ namespace Identity.Application.Dto
 
 
     }
-    public class UserProfileDto : UserDto { 
+    public class UserProfileDto : UserDto {
+        public UserProfileDto()
+        {
+            this.Roles = new List<RoleDto>();
+        }
+
         public IEnumerable<RoleDto> Roles { get; set; }
     }
 

@@ -1,12 +1,16 @@
-﻿using Identity.Domain.Aggregates.Entity;
+﻿using Identity.Domain.Aggregates.User;
+using Identity.Domain.Aggregates.Company;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Identity.Domain.Aggregates
+namespace Identity.Domain.Aggregates.Role
 {
+    /// <summary>
+    /// 为什么是独立聚合   可以脱离其他聚合根独立存在
+    /// </summary>
     public class Role : BaseEntity,IAggregateRoot
     {
 
@@ -19,9 +23,9 @@ namespace Identity.Domain.Aggregates
 
         public int CompanyId { get; private set; }
    
-        public virtual Company Company { get; private set; }
+        public virtual Company.Company Company { get; private set; }
       
-        public virtual ICollection<User> Users { get; private set; }
+        public virtual ICollection<User.User> Users { get; private set; }
 
     }
 }

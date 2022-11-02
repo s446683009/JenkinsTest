@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Identity.Domain.Aggregates.Entity
+namespace Identity.Domain.Aggregates.User
 {
     public class User : BaseEntity, IAggregateRoot
     {
@@ -19,6 +19,7 @@ namespace Identity.Domain.Aggregates.Entity
         public int DefaultCompanyId { get; private set; }
         public bool IsActived { get; private set; }
         public string Avatar { get; private set; }
+        public bool IsDeleted { get; set; }
         public DateTime? LastLoginTime { get; private set; }
         public virtual ICollection<UserCompanyRelation> Companies { get;set;} 
         public virtual ICollection<UserRoleRelation> Roles { get; set; }
@@ -32,10 +33,11 @@ namespace Identity.Domain.Aggregates.Entity
             this.Password = password;
             this.DefaultCompanyId = defaultCompanyId;
             this.Mobile = mobile;
-            this.Companies = new List<UserCompanyRelation>();
+            //this.Companies = new List<UserCompanyRelation>();
             //this.Roles = new List<Role>();
             this.IsActived = true;
             this.CreatedTime = DateTime.Now;
+            this.IsDeleted = true;
         }
 
         public bool  ChangePassword(string newPassword,string pswEncryptCode) {
@@ -80,7 +82,7 @@ namespace Identity.Domain.Aggregates.Entity
             return true;
         }
 
-        public override bool SetDelete() {
+        public  bool SetDelete() {
             this.IsActived = false;
             this.IsDeleted = true;
             return true;

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Identity.Domain;
 using Identity.Domain.Aggregates;
-using Identity.Domain.Aggregates.Entity;
+using Identity.Domain.Aggregates.User;
 using Identity.Domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
 

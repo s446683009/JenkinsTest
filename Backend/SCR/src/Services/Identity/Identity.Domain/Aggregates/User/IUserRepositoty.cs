@@ -1,4 +1,4 @@
-﻿using Identity.Domain.Aggregates.Entity;
+﻿using Identity.Domain.Aggregates;
 using Identity.Domain.SeedWork;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Identity.Domain.Aggregates
+namespace Identity.Domain.Aggregates.User
 {
     public interface IUserRepository:IRepository<User>
     {

@@ -7,7 +7,7 @@ namespace Identity.Api.Configurations
 {
     public class IdentityServerConfig
     {
-
+        public string IssueUrl { get; set; }
         public UserInteractionSetting UserInteraction { get; set; }
     }
 

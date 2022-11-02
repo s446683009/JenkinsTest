@@ -1,4 +1,4 @@
-﻿using Identity.Domain.Aggregates;
+﻿using Identity.Domain.Aggregates.Role;
 using Identity.Domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,7 +18,7 @@ namespace Identity.Infrastructure.RDB.Repository
         }
         public async Task<IList<Role>> GetRolesByIdsAsync(IList<int> roleIds)
         {
-          return  await _context.Roles.Where(t => t.IsDeleted == false && roleIds.Contains(t.RoleId)).ToListAsync();
+          return  await _context.Roles.Where(t=>roleIds.Contains(t.RoleId)).ToListAsync();
         }
 
         public async Task AddRoleAsync(Role role)

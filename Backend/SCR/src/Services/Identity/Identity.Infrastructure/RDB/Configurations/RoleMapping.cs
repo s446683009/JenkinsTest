@@ -1,4 +1,4 @@
-﻿using Identity.Domain.Aggregates;
+﻿using Identity.Domain.Aggregates.Role;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Identity.Domain.Aggregates
+namespace Identity.Domain.Aggregates.User
 {
+    /// <summary>
+    /// 人员绑定公司
+    /// </summary>
     public class UserCompanyRelation
     {
         public int UserId { get; set; }
