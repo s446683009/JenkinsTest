@@ -80,7 +80,7 @@ namespace Identity.Application
 
             user.LoginByPassword(password);
             await _userRepository.UnitOfWork.SaveEntitiesAsync();
-            //发布用户登录事件
+            //TODo 发布用户登录事件
             return ConvertUserDto(user);
         }
 

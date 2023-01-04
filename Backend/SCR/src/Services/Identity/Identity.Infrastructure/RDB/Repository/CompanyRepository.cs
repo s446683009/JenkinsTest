@@ -26,5 +26,16 @@ namespace Identity.Infrastructure.RDB.Repository
         {
              await _context.Companys.AddAsync(company);
         }
+
+        public Task DeleteAsync(Company company)
+        { 
+            _context.Companys.Remove(company);
+            return  Task.CompletedTask;
+        }
+
+        public async Task<Company> FindById(int companyId)
+        {
+            return await _context.Companys.FindAsync(companyId);
+        }
     }
 }

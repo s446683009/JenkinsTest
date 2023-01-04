@@ -10,6 +10,13 @@ namespace Identity.Domain.Aggregates.Company
     public interface ICompanyRepository:IRepository<Company>
     {
        Task<IList<Company>> GetCompaniesByIdsAsync(IList<int> companyIds);
-        Task AddCompanyAsync(Company company);
+       Task AddCompanyAsync(Company company);
+
+       Task DeleteAsync(Company company);
+
+       Task<Company> FindById(int companyId);
+        
+       
+       
     }
 }

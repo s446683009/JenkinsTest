@@ -15,10 +15,19 @@ namespace Identity.Infrastructure.RDB.Configurations
         {
             builder.ToTable("Company");
             builder.HasKey(t=>t.CompanyId);
-
             builder.Property(t=>t.CompanyId).HasDefaultValueSql("nextval('\"CompanyId\"')"); 
             builder.Property(t => t.Name).IsRequired().HasMaxLength(50);
+            builder.HasMany<CompanySetting>().WithOne().HasForeignKey(t=>t.CompanyId);
+        }
+    }
 
+    public class COmpanySetttingMapping : IEntityTypeConfiguration<CompanySetting>
+    {
+        public void Configure(EntityTypeBuilder<CompanySetting> builder)
+        {
+            builder.ToTable("CompanySetting");
+            builder.HasKey(t=>new{t.CompanyId,t.Key});
+            
         }
     }
 }

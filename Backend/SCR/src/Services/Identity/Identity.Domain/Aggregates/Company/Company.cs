@@ -11,7 +11,9 @@ namespace Identity.Domain.Aggregates.Company
     {
         public int CompanyId { get; private set; }
         public string Name { get; private set; }
+        public string Code { get; set; }
         public bool IsDeleted { get; set; }
+        public virtual ICollection<CompanySetting> Settings { get; set; }
 
         public Company(int companyId,string name) {
             this.CompanyId = companyId;

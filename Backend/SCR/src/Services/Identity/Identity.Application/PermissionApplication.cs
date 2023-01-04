@@ -40,6 +40,7 @@ public class PermissionApplication:IPermissionApplication
     public async Task DeleteAsync(long id)
     {
         var permission = await _permissionRepository.FindAsync(id);
+        
         await _permissionRepository.DeleteAsync(permission);
     }
     

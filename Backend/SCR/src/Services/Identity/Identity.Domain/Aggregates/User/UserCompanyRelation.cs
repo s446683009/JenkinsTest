@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Identity.Domain.Aggregates.User
 {
     /// <summary>
-    /// 人员绑定公司
+    /// 人员绑定组织
     /// </summary>
     public class UserCompanyRelation
     {
