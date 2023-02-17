@@ -40,7 +40,7 @@ namespace Identity.Domain.Aggregates.User
             this.IsDeleted = true;
         }
 
-        public bool  ChangePassword(string newPassword,string pswEncryptCode) {
+        public bool ChangePassword(string newPassword,string pswEncryptCode) {
 
             this.Password = EncrypyPsw(newPassword, pswEncryptCode) ;
             this.PswEncryptCode = PswEncryptCode;

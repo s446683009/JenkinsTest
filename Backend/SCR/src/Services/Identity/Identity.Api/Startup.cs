@@ -33,6 +33,7 @@ using Identity.Application.Queries;
 using Identity.Api.Configurations;
 using Identity.IApplication;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 
 namespace Identity.Api
 {
@@ -208,7 +209,7 @@ namespace Identity.Api
 
 
 
-                    await context.Response.WriteAsync(System.Text.Json.JsonSerializer.Serialize(apiBaseResult));
+                    await context.Response.WriteAsync(JsonConvert.SerializeObject(apiBaseResult));
                 });
 
 
@@ -224,7 +225,7 @@ namespace Identity.Api
             app.UseAuthorization();
             app.UseIdentityServer();
             app.UseEndpoints(endpoints =>
-            {   // �ƶ�·�ɺͿ�������ƥ�����
+            {   // 
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
