@@ -35,7 +35,7 @@ namespace Identity.Application.Queries
             var result= ConvertUserProfileDto(user);
             result.Roles = user.Roles.Select(t=>new RoleDto() { 
                 RoleId=t.RoleId,
-                RoleName=roleList.FirstOrDefault(c=>c.RoleId==t.RoleId)?.Name
+                Name=roleList.FirstOrDefault(c=>c.RoleId==t.RoleId)?.Name
             });
 
             return result;
