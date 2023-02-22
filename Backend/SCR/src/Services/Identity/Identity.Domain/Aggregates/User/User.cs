@@ -74,7 +74,7 @@ namespace Identity.Domain.Aggregates.User
             if (this.Password != encryptedPassword)
                 throw new Exception("账户或密码错误");
 
-            this.ModifiedTime = DateTime.Now;
+            //this.ModifiedTime = DateTime.Now;
             this.LastLoginTime = DateTime.Now;
             
 

@@ -10,6 +10,7 @@ namespace Identity.Api.Controllers.Api;
 [ApiController]
 public class PermissionController:Controller
 {
+    [HttpGet]
     [Route("actions")]
     public  async Task<IEnumerable<string>> GetActions()
     {

@@ -33,10 +33,15 @@ namespace Identity.Application.Queries
                 throw new NullReferenceException("找不到用户");
             }
             var result= ConvertUserProfileDto(user);
-            result.Roles = user.Roles.Select(t=>new RoleDto() { 
-                RoleId=t.RoleId,
-                Name=roleList.FirstOrDefault(c=>c.RoleId==t.RoleId)?.Name
-            });
+            if (user.Roles != null)
+            {
+                result.Roles = user.Roles.Select(t=>new RoleDto() { 
+                    RoleId=t.RoleId,
+                    Name=roleList.FirstOrDefault(c=>c.RoleId==t.RoleId)?.Name
+                });
+            }
+
+         
 
             return result;
         }
