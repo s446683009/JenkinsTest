@@ -1,10 +1,11 @@
 ﻿
 using System;
-
+using System.Collections.Generic;
 using System.Linq;
 
 using System.Threading.Tasks;
 using Identity.Application.Dtos;
+using Identity.Application.Dtos.Requests;
 using Identity.Domain.Aggregates.Company;
 using Identity.Domain.Aggregates.User;
 using Identity.Domain.Aggregates.Role;
@@ -88,6 +89,12 @@ namespace Identity.Application
         {
             return await _userQuery.GetProfileAsync(userId);
         }
+
+        public async Task<PageResult<UserListDto>> GetUsersAsync(UserSearchRequest request)
+        {
+           return  await _userQuery.GetUsersAsync(request);
+        }
+
 
         private static UserDto ConvertUserDto(User user)
         {

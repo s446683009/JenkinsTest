@@ -13,7 +13,8 @@ namespace Identity.Application.Dtos
         public string Avatar { get; set; }
         public string Email { get; set; }
         public string Description { get; set; }
-
+        public DateTime CreateDate { get; set; }
+        public  bool Actived { get; set; }
 
     }
     public class UserProfileDto : UserDto {

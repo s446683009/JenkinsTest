@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Identity.Application.Dtos;
 using Identity.Application.Dtos.Requests;
+using Microsoft.EntityFrameworkCore;
 
 namespace Identity.Application.Queries
 {
@@ -46,20 +47,37 @@ namespace Identity.Application.Queries
             return result;
         }
 
-        public Task<IEnumerable<UserListDto>> GetUsers(UserSearchRequest userSearchRequest)
+        public async Task<PageResult<UserListDto>> GetUsersAsync(UserSearchRequest request)
         {
             var userQuery = _context.Users.Where(t => !t.IsDeleted).AsQueryable();
-            if (!string.IsNullOrEmpty(userSearchRequest.UserName)) {
-                userQuery = userQuery.Where(t => t.Account.Contains(userSearchRequest.UserName));
+            if (!string.IsNullOrEmpty(request.UserName)) {
+                userQuery = userQuery.Where(t => t.Account.Contains(request.UserName));
             }
 
-            if (userSearchRequest.CompanyId.HasValue) {
-                userQuery = userQuery.Where(t => t.Companies.Any(c => c.CompanyId == userSearchRequest.CompanyId));
+            if (request.CompanyId.HasValue) {
+                userQuery = userQuery.Where(t => t.Companies.Any(c => c.CompanyId == request.CompanyId));
             }
 
-            return Task.FromResult(new List<UserListDto>().AsEnumerable());
+            var count = userQuery.Count();
+            var userList = await userQuery.Skip((request.Page - 1) * request.Rows).Take(request.Rows).Select(t=>new UserListDto()
+            {
+                Description =t.Descrption,
+                UserId = t.UserId,
+                Email = t.Email,
+                Account = t.Account,
+                CreateDate = t.CreatedTime,
+                Actived= t.IsActived,
+                Avatar = t.Avatar
 
+            }).ToListAsync();
 
+            return new PageResult<UserListDto>()
+            {
+                List = userList,
+                Total =count,
+                Page = request.Page,
+                Rows =request.Rows
+            };
         }
 
         private UserProfileDto ConvertUserProfileDto(User user) {

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Formats.Asn1;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ using Identity.Api.Models;
 using Identity.Api.Models.Api;
 using Identity.Api.Models.Api.request;
 using Identity.Application.Dtos;
+using Identity.Application.Dtos.Requests;
 using Identity.IApplication;
 using Identity.IApplication.Dtos.Requests;
 
@@ -79,6 +81,16 @@ namespace IUser.Api.Controllers.Api
             }
          
         }
-       
+
+
+        [Route("users")]
+        [HttpPost]
+        [ProducesResponseType(typeof(PageResult<UserListDto>), 200)]
+        public async Task<ApiResult<PageResult<UserListDto>>> GetUsersAsync(UserSearchRequest request)
+        {
+            var result= await _IUserApp.GetUsersAsync(request);
+            return ApiResult<PageResult<UserListDto>>.Success(result);
+        }
+
     }
 }

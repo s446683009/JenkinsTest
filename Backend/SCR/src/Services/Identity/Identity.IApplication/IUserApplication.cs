@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Identity.Application.Dtos;
+using Identity.Application.Dtos.Requests;
 using Identity.IApplication.Dtos.Requests;
 
 namespace Identity.IApplication
@@ -21,6 +22,7 @@ namespace Identity.IApplication
         
         //query
         Task<UserProfileDto> GetProfileAsync(int userId);
+        Task<PageResult<UserListDto>> GetUsersAsync(UserSearchRequest request);
 
     }
 }

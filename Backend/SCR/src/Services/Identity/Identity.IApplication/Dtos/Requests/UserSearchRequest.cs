@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace Identity.Application.Dtos.Requests
 {
-    public class UserSearchRequest:SearchRequest
+    public class UserSearchRequest:PageSearchRequest
     {
 
         public string UserName { get; set; }
 
         public int? CompanyId { get; set; }
-        public int Page { get; set; } = 1;
-
-        public int Rows { get; set; } = 999;
+  
     }
 }
