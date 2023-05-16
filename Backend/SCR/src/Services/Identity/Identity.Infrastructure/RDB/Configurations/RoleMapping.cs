@@ -17,6 +17,7 @@ namespace Identity.Infrastructure.RDB.Configurations
             builder.HasKey(t => t.RoleId);
             builder.Property(t => t.RoleId).HasDefaultValueSql("nextval('\"RoleId\"')");
             builder.Property(t => t.Name).IsRequired();
+            builder.Property(t => t.Code).HasMaxLength(50);
            
         }
 

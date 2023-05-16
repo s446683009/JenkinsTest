@@ -18,6 +18,7 @@ namespace Identity.Infrastructure.RDB.Configurations
             builder.Property(t=>t.CompanyId).HasDefaultValueSql("nextval('\"CompanyId\"')"); 
             builder.Property(t => t.Name).IsRequired().HasMaxLength(50);
             builder.HasMany<CompanySetting>().WithOne().HasForeignKey(t=>t.CompanyId);
+            builder.Property(t => t.Code).HasMaxLength(50);
         }
     }
 

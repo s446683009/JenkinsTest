@@ -15,6 +15,7 @@ namespace Identity.Application.Dtos
         public string Description { get; set; }
         public DateTime CreateDate { get; set; }
         public  bool Actived { get; set; }
+        public string Mobile { get; set; }
 
     }
     public class UserProfileDto : UserDto {

@@ -88,7 +88,7 @@ namespace Identity.Application.Queries
                 Description=user.Descrption,
                 Email=user.Email,
                 UserId=user.UserId,
-
+                Mobile = user.Mobile
             };
         
         }
