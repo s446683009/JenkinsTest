@@ -58,7 +58,10 @@ namespace Identity.Api.Controllers.Api
         [HttpGet]
         [Route("profile")]
         [ProducesResponseType(typeof(UserDto), 200)]
-        [Authorize(Policy ="permission")]
+        //基于·这个策略的话需要单独对策略去认证
+        //[Authorize(Policy ="permission")]
+        [Authorize]
+        
         public async Task<ApiResult<UserDto>> GetProfileAsync() {
             var userId = int.Parse(User.FindFirst(IdentityConst.userId).Value);
             var profile = await _IUserApp.GetProfileAsync(userId);
