@@ -20,8 +20,9 @@ using Identity.Application.Dtos.Requests;
 using Identity.IApplication;
 using Identity.IApplication.Dtos.Requests;
 
-namespace IUser.Api.Controllers.Api
+namespace Identity.Api.Controllers.Api
 {
+    
     [Route("api/v1/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
@@ -48,7 +49,7 @@ namespace IUser.Api.Controllers.Api
             };
 
             var token=TokenHelper.CreateToken(claims, securityKey);
-
+            
 
             return ApiResult<string>.Success(token);
 
@@ -57,7 +58,7 @@ namespace IUser.Api.Controllers.Api
         [HttpGet]
         [Route("profile")]
         [ProducesResponseType(typeof(UserDto), 200)]
-        [Authorize]
+        [Authorize(Policy ="permission")]
         public async Task<ApiResult<UserDto>> GetProfileAsync() {
             var userId = int.Parse(User.FindFirst(IdentityConst.userId).Value);
             var profile = await _IUserApp.GetProfileAsync(userId);

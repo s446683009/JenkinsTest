@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-
+using System.Net;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Identity.Api.Rquirements;
 using Microsoft.IdentityModel.Tokens;
@@ -208,7 +208,7 @@ namespace Identity.Api
                     };
 
 
-
+                    context.Response.StatusCode = (int)HttpStatusCode.OK;
                     await context.Response.WriteAsync(JsonConvert.SerializeObject(apiBaseResult));
                 });
 
@@ -250,6 +250,7 @@ namespace Identity.Api
           
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
+                    
                     Title = "SCR Identity HTTP API",
                     Version = "v1",
                     Description = "SCR Identity HTTP API"

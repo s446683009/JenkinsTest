@@ -14,7 +14,7 @@ namespace Identity.Api.Handers
 {
     public class PermissionAuthorizationHandler : IAuthorizationHandler
     {
-
+        
         public async Task HandleAsync(AuthorizationHandlerContext context)
         {
             var filterContext = context.Resource as AuthorizationFilterContext;
