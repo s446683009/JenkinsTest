@@ -67,7 +67,8 @@ namespace Identity.Application.Queries
                 Account = t.Account,
                 CreateDate = t.CreatedTime,
                 Actived= t.IsActived,
-                Avatar = t.Avatar
+                Avatar = t.Avatar,
+                Mobile =t.Mobile
 
             }).ToListAsync();
 
