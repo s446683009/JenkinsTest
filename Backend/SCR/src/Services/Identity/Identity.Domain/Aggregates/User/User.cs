@@ -96,7 +96,7 @@ namespace Identity.Domain.Aggregates.User
             {
                 RoleId = t
             }).ToList();
-            this.ModifiedTime = DateTime.Now;
+
           
             return true;
         }
@@ -111,20 +111,20 @@ namespace Identity.Domain.Aggregates.User
             this.Companies = companies.Select(t=>new UserCompanyRelation() { 
                 CompanyId=t
             }).ToList();
-            this.ModifiedTime = DateTime.Now;
+            
       
 
             return true;
         }
         public bool SetEmail(string email) {
             this.Email = email;
-            this.ModifiedTime = DateTime.Now;
+         
             return true;
         }
 
         public bool ChangeAvatar(string imgUrl) {
             this.Avatar = imgUrl;
-            this.ModifiedTime = DateTime.Now;
+            
             return true;
         }
     }

@@ -17,6 +17,7 @@ namespace Identity.Api.Handers
         
         public async Task HandleAsync(AuthorizationHandlerContext context)
         {
+          
             var filterContext = context.Resource as AuthorizationFilterContext;
             var descriptor = filterContext?.ActionDescriptor as ControllerActionDescriptor;
             var permission = string.Empty;
@@ -25,7 +26,6 @@ namespace Identity.Api.Handers
             {
                 var ht = context.Resource as HttpContext;
                 var en = ht.GetEndpoint();
-            
                 descriptor=en.Metadata.GetMetadata<ControllerActionDescriptor>();
             }
 

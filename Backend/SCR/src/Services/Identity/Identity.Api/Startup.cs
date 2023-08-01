@@ -34,6 +34,7 @@ using Identity.Api.Configurations;
 using Identity.IApplication;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
+using Services.Common;
 
 namespace Identity.Api
 {
@@ -54,10 +55,13 @@ namespace Identity.Api
             var identitySetting= Configuration.GetSection("IdentitySettings").Get<IdentityServerConfig>();
             var connectString = Configuration.GetConnectionString("Identity");
             services.AddSingleton(jwtSettings);
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Startup>());
+            
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
             //
-            services.AddControllersWithViews();
-
+           
+     
+            //添加认证
             services.AddAuthentication(options=>
                 {
                   
@@ -83,10 +87,14 @@ namespace Identity.Api
                 };
                 options.SaveToken = true;
             });
-         
-          
 
-            
+            services.AddControllersWithViews().AddRazorRuntimeCompilation().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
+               
+            });
+           
+            //添加授权
             services.AddAuthorization(options=> {
           
                 options.AddPolicy("permission",p=> {
@@ -135,8 +143,8 @@ namespace Identity.Api
                     options.MigrationsAssembly(typeof(IdentityContext).GetTypeInfo().Assembly.GetName().Name);
                 });
             });
-           
-            services.AddControllers();
+
+         
             services.AddCors(options =>
             {
                 // Policy 名稱 CorsPolicy 是自訂的，可以自己改
@@ -177,60 +185,23 @@ namespace Identity.Api
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseExceptionHandler(errApp => {
-                errApp.Run(async context =>
-                {
-                    var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
-                    Exception exception = exceptionHandlerPathFeature?.Error;
-                    if (exception?.InnerException != null)
-                    {
-                        exception = exception.InnerException;
-                    }
-                    var logger = context.RequestServices.GetService<ILogger<Startup>>();
-                    if (exception != null)
-                    {
-
-                        logger.LogError(exceptionHandlerPathFeature.Error, exceptionHandlerPathFeature.Error.Message);
-
-                    }
-                    else
-                    {
-                        logger.LogError(exceptionHandlerPathFeature.Error, exceptionHandlerPathFeature.Error.Message);
-                    }
-
-
-                    context.Response.ContentType = "application/json; charset=utf-8";
-                    var apiBaseResult = new ApiResult<bool>()
-                    {
-                        Code = ApiResultCode.Fail,
-                        Data = false,
-                        Message = exception?.Message
-                    };
-
-
-                    context.Response.StatusCode = (int)HttpStatusCode.OK;
-                    await context.Response.WriteAsync(JsonConvert.SerializeObject(apiBaseResult));
-                });
-
-
-
-
-
-            });
+           
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
             app.UseCors("qwer");
             app.UseAuthentication();
-            app.UseAuthorization();
+        
             app.UseIdentityServer();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {   // 
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                
             });
-          
+           
             app.UseSwagger()
          .UseSwaggerUI(c =>
          {
@@ -238,7 +209,7 @@ namespace Identity.Api
              c.OAuthClientId("Identity");
              c.OAuthAppName("Identity Swagger UI");
          });
-       
+           
      
      
         }

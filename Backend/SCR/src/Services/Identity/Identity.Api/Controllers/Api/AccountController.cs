@@ -19,6 +19,9 @@ using Identity.Application.Dtos;
 using Identity.Application.Dtos.Requests;
 using Identity.IApplication;
 using Identity.IApplication.Dtos.Requests;
+using Services.Common;
+using System.Collections.Generic;
+using Identity.Domain.Aggregates.User;
 
 namespace Identity.Api.Controllers.Api
 {
@@ -29,10 +32,12 @@ namespace Identity.Api.Controllers.Api
     {
         private IUserApplication _IUserApp;
         private JwtSetting _jwtSetting;
-        public  AccountController(IUserApplication IUserApplication, JwtSetting jwtSetting)
+        private IEnumerable<IUserRepository> _userRepositories;
+        public  AccountController(IUserApplication IUserApplication, JwtSetting jwtSetting,IEnumerable<IUserRepository> userRepositories)
         {
             _IUserApp = IUserApplication;
             _jwtSetting = jwtSetting;
+            _userRepositories = userRepositories;
         }
         [Route("login")]
         [HttpPost]
