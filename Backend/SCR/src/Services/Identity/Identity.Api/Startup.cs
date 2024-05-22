@@ -85,9 +85,9 @@ namespace Identity.Api
                     ValidIssuer = jwtSettings.Issuer,
                     ValidAudience = jwtSettings.Audience,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret)),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+             
                 };
                 options.SaveToken = true;
             });
