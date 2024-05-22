@@ -3,7 +3,6 @@ using System.Reflection;
 using Category.Api.Db;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using Serilog;
 using Services.Common;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
