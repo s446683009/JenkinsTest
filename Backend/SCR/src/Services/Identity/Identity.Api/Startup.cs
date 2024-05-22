@@ -32,6 +32,7 @@ using Identity.Infrastructure.RDB.Repository;
 using Identity.Application.Queries;
 using Identity.Api.Configurations;
 using Identity.IApplication;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 using Services.Common;
@@ -59,8 +60,11 @@ namespace Identity.Api
             
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
             //
-           
-     
+
+            services.AddHttpLogging(option =>
+            {
+                option.LoggingFields = HttpLoggingFields.All;
+            });
             //添加认证
             services.AddAuthentication(options=>
                 {
@@ -188,6 +192,7 @@ namespace Identity.Api
            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseHttpLogging();
             app.UseRouting();
             app.UseCors("qwer");
             app.UseAuthentication();

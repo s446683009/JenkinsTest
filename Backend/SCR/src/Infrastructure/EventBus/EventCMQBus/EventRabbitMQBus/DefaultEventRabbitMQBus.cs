@@ -14,7 +14,6 @@ using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using System.Collections.Concurrent;
 using RabbitMQ.Client.Events;
-
 namespace EventRabbitMQBus
 {
     public class DefaultEventRabbitMQBus : IEventBus

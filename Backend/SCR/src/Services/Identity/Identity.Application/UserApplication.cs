@@ -44,7 +44,7 @@ namespace Identity.Application
 
         public async Task CreateUserAsync(RegisterRequest registerRquest)
         {
-            //await CheckRegisterUserAsync(registerRquest);
+            
             var encryptPsw = Guid.NewGuid().ToString();
 
             var psw = User.EncrypyPsw(registerRquest.Password, encryptPsw);
